@@ -5,6 +5,11 @@ Player::Player()
     TraceLog(LOG_DEBUG, "GAME: Player created!");
 }
 
+Rectangle Player::getRect()
+{
+    return m_Rect;
+}
+
 void Player::draw()
 {
     DrawRectangleRec(m_Rect, RAYWHITE);
@@ -12,4 +17,19 @@ void Player::draw()
 
 void Player::update()
 {
+    float oldPosition = m_Rect.x;
+
+    if (IsKeyDown(KEY_A))
+        m_Rect.x -= m_Velocity * GetFrameTime();
+
+    if (IsKeyDown(KEY_D))
+        m_Rect.x += m_Velocity * GetFrameTime();
+
+    oldPosition = m_Rect.y;
+
+    if (IsKeyDown(KEY_W))
+        m_Rect.y -= m_Velocity * GetFrameTime();
+
+    if (IsKeyDown(KEY_S))
+        m_Rect.y += m_Velocity * GetFrameTime();
 }

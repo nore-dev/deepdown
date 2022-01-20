@@ -19,6 +19,12 @@ int main(void)
 
         player.update();
 
+        // TODO: Delete
+        if (CheckCollisionRecs(player.getRect(), testRect))
+        {
+            TraceLog(LOG_DEBUG, "Collision Detected!");
+        }
+
         BeginDrawing();
         ClearBackground(BLACK);
 

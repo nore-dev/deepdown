@@ -9,6 +9,8 @@ class Player
 public:
     Player();
 
+    Rectangle getRect();
+
     void update();
     void draw();
 
@@ -18,7 +20,7 @@ private:
     uint8_t m_Health = 6;
     uint8_t m_MaxHealt = 6;
 
-    float m_Velocity = 10;
+    float m_Velocity = 200;
 
     bool m_Jumped = false;
 };
