@@ -14,6 +14,8 @@ public:
     void update();
     void draw();
 
+    Vector2 getPosition();
+
 private:
     Rectangle m_Rect = {40, 40, 30, 50};
 
@@ -23,6 +25,8 @@ private:
     float m_Velocity = 200;
 
     bool m_Jumped = false;
+
+    void m_SetPosition(Vector2 pos);
 };
 
 #endif

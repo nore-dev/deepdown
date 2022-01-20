@@ -33,3 +33,14 @@ void Player::update()
     if (IsKeyDown(KEY_S))
         m_Rect.y += m_Velocity * GetFrameTime();
 }
+
+Vector2 Player::getPosition()
+{
+    return {m_Rect.x, m_Rect.y};
+}
+
+void Player::m_SetPosition(Vector2 pos)
+{
+    m_Rect.x = pos.x;
+    m_Rect.y = pos.y;
+}
