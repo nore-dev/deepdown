@@ -19,7 +19,7 @@ int main(void)
     while (!WindowShouldClose())
     {
 
-        player.update();
+        player.update(level);
 
         BeginDrawing();
         ClearBackground(BLACK);

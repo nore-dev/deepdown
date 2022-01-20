@@ -15,9 +15,10 @@ void Player::draw()
     DrawRectangleRec(m_Rect, RAYWHITE);
 }
 
-void Player::update()
+void Player::update(Level &level)
 {
-    float oldPosition = m_Rect.x;
+
+    Vector2 oldPosition = getPosition();
 
     if (IsKeyDown(KEY_A))
         m_Rect.x -= m_Velocity * GetFrameTime();
@@ -25,13 +26,13 @@ void Player::update()
     if (IsKeyDown(KEY_D))
         m_Rect.x += m_Velocity * GetFrameTime();
 
-    oldPosition = m_Rect.y;
+    m_HandleCollision(oldPosition, level);
 
-    if (IsKeyDown(KEY_W))
-        m_Rect.y -= m_Velocity * GetFrameTime();
+    oldPosition = getPosition();
 
-    if (IsKeyDown(KEY_S))
-        m_Rect.y += m_Velocity * GetFrameTime();
+    m_Rect.y += 5;
+
+    m_HandleCollision(oldPosition, level);
 }
 
 Vector2 Player::getPosition()
@@ -43,4 +44,26 @@ void Player::m_SetPosition(Vector2 pos)
 {
     m_Rect.x = pos.x;
     m_Rect.y = pos.y;
+}
+
+void Player::m_HandleCollision(Vector2 &oldPosition, Level &level)
+{
+    // TODO: Find a better way
+    int x = m_Rect.x / BLOCK_SIZE;
+    int y = m_Rect.y / BLOCK_SIZE;
+
+    for (int yo = -1; yo < 2; yo++)
+    {
+        for (int xo = -1; xo < 2; xo++)
+        {
+            if (level.getBlock(x + xo, y + yo) && CheckCollisionRecs(m_Rect, level.getRect(x + xo, y + yo)))
+            {
+                m_SetPosition(oldPosition);
+                oldPosition = getPosition();
+
+                TraceLog(LOG_DEBUG, "Colllision Detected");
+                return;
+            }
+        }
+    }
 }

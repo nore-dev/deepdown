@@ -18,7 +18,7 @@ static const uint8_t SECTION_WIDTH = 13;
 static const uint8_t SECTION_HEIGHT = 28;
 static const uint8_t SECTION_COUNT = 1;
 
-static const uint8_t BLOCK_SIZE = 30;
+static const uint8_t BLOCK_SIZE = 40;
 
 class Level
 {
