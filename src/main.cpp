@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include <stdint.h>
 #include "Player.hpp"
+#include "Level.hpp"
 
 static const size_t SCREEN_WIDTH = 640;
 static const size_t SCREEN_HEIGHT = 480;
@@ -13,23 +14,19 @@ int main(void)
     SetTraceLogLevel(LOG_DEBUG);
 
     Player player = Player();
-    Rectangle testRect = {10, 200, 100, 40};
+    Level level = Level();
+
     while (!WindowShouldClose())
     {
 
         player.update();
 
-        // TODO: Delete
-        if (CheckCollisionRecs(player.getRect(), testRect))
-        {
-            TraceLog(LOG_DEBUG, "Collision Detected!");
-        }
-
         BeginDrawing();
         ClearBackground(BLACK);
 
+        level.draw();
         player.draw();
-        DrawRectangleRec(testRect, YELLOW);
+
         EndDrawing();
     }
 
